@@ -42,7 +42,7 @@ class m140711_063216_blog_init extends \yii\db\Migration
             'notify_comments' => Schema::TYPE_BOOLEAN,
             'date' => Schema::TYPE_DATETIME,
             'date_gmt' => Schema::TYPE_DATETIME,
-        ]);
+        ],$tableOptions);
         
         $this->createTable('{{%blog_meta}}',[
             'id' => Schema::TYPE_PK,
@@ -50,13 +50,13 @@ class m140711_063216_blog_init extends \yii\db\Migration
             'type' => Schema::TYPE_STRING . '(20) NULL',
             'name' => Schema::TYPE_STRING . '(255) NULL',
             'value' => Schema::TYPE_TEXT,
-        ]);
+        ],$tableOptions);
         
         $this->createTable('{{%blog_term_relationships}}',[
             'id' => Schema::TYPE_PK,
             'post_id' => Schema::TYPE_INTEGER,
             'term_id' => Schema::TYPE_INTEGER,
-        ]);
+        ],$tableOptions);
         
         $this->createTable('{{%blog_terms}}',[
             'id' => Schema::TYPE_PK,
@@ -64,7 +64,7 @@ class m140711_063216_blog_init extends \yii\db\Migration
             'slug' => Schema::TYPE_STRING . '(255) NULL',
             'description' => Schema::TYPE_TEXT,
             'type' => Schema::TYPE_STRING . '(20) NULL',
-        ]);
+        ],$tableOptions);
         
         $this->addForeignKey('FK-psots-user.id','{{%blog_posts}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
         $this->addForeignKey('FK-comments-user.id','{{%blog_comments}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
