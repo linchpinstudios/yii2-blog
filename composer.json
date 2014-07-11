@@ -1,0 +1,25 @@
+{
+	"name": "linchpinstudios/yii2-blog",
+	"description": "Simple Blog for the Yii2 framework",
+	"keywords": ["yii2", "blog",],
+	"type": "yii2-extension",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/linchpinstudios/yii2-blog/issues",
+		"source": "https://github.com/linchpinstudios/yii2-blog"
+	},
+	"authors": [
+		{
+			"name": "Josh Hagel",
+			"email": "joshhagel@linchpinstudios.com"
+		}
+	],
+	"require": {
+		"yiisoft/yii2": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"linchpinstudios\\blog\\": ""
+		}
+	}
+}
