@@ -33,7 +33,7 @@ class m140711_063216_blog_init extends \yii\db\Migration
             'post_id' => Schema::TYPE_INTEGER,
             'comment' => Schema::TYPE_TEXT,
             'approved' => Schema::TYPE_STRING . '(20) NULL',
-            'parent' => Schema:: INT NULL,
+            'parent' => Schema::TYPE_INTEGER,
             'author_name' => Schema::TYPE_STRING . '(255) NULL',
             'author_email' => Schema::TYPE_STRING . '(255) NULL',
             'author_url' => Schema::TYPE_STRING . '(255) NULL',
