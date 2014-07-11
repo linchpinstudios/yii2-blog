@@ -1,7 +1,7 @@
 {
 	"name": "linchpinstudios/yii2-blog",
 	"description": "Simple Blog for the Yii2 framework",
-	"keywords": ["yii2", "blog",],
+	"keywords": ["yii2", "blog"],
 	"type": "yii2-extension",
 	"license": "MIT",
 	"support": {
