@@ -1,6 +1,6 @@
 <?php
 
-namespace linchpinstudios\blog;
+namespace linchpinstudios\blog\widgets;
 
 use linchpinstudios\blog\models\BlogPosts;
 use yii\helpers\Html;
