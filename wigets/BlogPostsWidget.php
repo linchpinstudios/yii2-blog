@@ -46,7 +46,7 @@ class BlogPostsWidget extends \yii\base\Widget
 	{
 	
 	    $postRender = '<div class="post">';
-            $postRender .= Html::tag('h1',);
+            $postRender .= Html::tag('h1',Html::a($post->title,['blog/blogposts/view']));
 	    $postRender .= '</div>';
 	
 	
