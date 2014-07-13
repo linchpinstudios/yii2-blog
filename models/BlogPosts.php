@@ -3,7 +3,7 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
-use app\models\User;
+use common\models\User;
 use yii\helpers\ArrayHelper;
 
 /**
