@@ -103,7 +103,7 @@ class BlogPosts extends \yii\db\ActiveRecord
     
     public function getAuthorList()
     {
-        $model = User::find->asArray()->all();
+        $model = User::find()->asArray()->all();
         return ArrayHelper::map($model, 'id', 'username');
     }
 
