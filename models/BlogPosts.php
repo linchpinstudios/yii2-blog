@@ -3,6 +3,8 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
+use app\models\User;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "blog_posts".
@@ -97,6 +99,12 @@ class BlogPosts extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'authorId']);
+    }
+    
+    public function getAuthorList()
+    {
+        $model = User::find->asArray()->all();
+        return ArrayHelper::map($model, 'id', 'username');
     }
 
     /**

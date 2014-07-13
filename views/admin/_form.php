@@ -10,6 +10,12 @@ use dosamigos\fileupload\FileUploadUI;
  * @var linchpinstudios\blog\models\BlogPosts $model
  * @var yii\widgets\ActiveForm $form
  */
+
+$tfArray = [
+    '1' => 'Allow',
+    '0' => 'Disallow',
+]
+
 ?>
 
 <div class="blog-posts-form">
@@ -45,9 +51,9 @@ use dosamigos\fileupload\FileUploadUI;
         ]);
     ?>
     
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'user_id')->dropDownList($model->authorList) ?>
 
-    <?= $form->field($model, 'comments')->textInput() ?>
+    <?= $form->field($model, 'comments')->dropDownList($tfArray) ?>
 
     <?= $form->field($model, 'excerpt')->textarea(['rows' => 6]) ?>
 

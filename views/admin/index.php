@@ -12,6 +12,7 @@ use yii\grid\GridView;
 $this->title = 'Blog Posts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="blog-posts-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Blog Posts', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
