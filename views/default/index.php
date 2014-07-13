@@ -1,5 +1,5 @@
 <?php
-use linchpinstudios\blog\wigets\BlogPostsWidget
+use linchpinstudios\blog\widgets\BlogPostsWidget
 
 ?>
 
