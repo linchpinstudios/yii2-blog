@@ -5,6 +5,8 @@ namespace linchpinstudios\blog\models;
 use Yii;
 use common\models\User;
 use yii\helpers\ArrayHelper;
+use yii\behaviors\TimeStampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "blog_posts".
@@ -32,6 +34,54 @@ use yii\helpers\ArrayHelper;
  */
 class BlogPosts extends \yii\db\ActiveRecord
 {
+
+
+    public function behaviors()
+    {
+        return [
+            'modified' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'modified',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'modified',
+                ],
+                'value' => function() { 
+                    return date('Y-m-d H:i:s');
+                },
+            ],
+            'modifiedGMT' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'modified_gmt',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_gmt',
+                ],
+                'value' => function() { 
+                    return gmdate('Y-m-d H:i:s');
+                },
+            ],
+            'date' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'date',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
+                ],
+                'value' => function() { 
+                    return (empty($this->date) ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s',strtotime($this->date)));
+                },
+            ],
+            'dateGMT' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'date_gmt',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'date_gmt',
+                ],
+                'value' => function() { 
+                    return (empty($this->date) ? gmdate('Y-m-d H:i:s') : gmdate('Y-m-d H:i:s',strtotime($this->date)));
+                },
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */

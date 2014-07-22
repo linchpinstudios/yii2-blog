@@ -22,7 +22,8 @@ class AdminController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => true,
+                        'actions' => ['error',],
+                        'allow' => ['true'],
                     ],
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete'],

@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var linchpinstudios\blog\models\BlogPosts $model
+ * @var common\models\BlogPosts $model
  */
 
 $this->title = $model->title;
@@ -14,9 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blog-posts-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
+        <?= Html::a('index', ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -31,18 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
-            'comments',
             'title',
-            'body:ntext',
-            'thumbnail',
-            'excerpt:ntext',
-            'status',
-            'slug',
-            'date',
-            'date_gmt',
-            'modified',
-            'modified_gmt',
+            'text:ntext',
+            'authorId',
+            'categoryId',
+            'publishDate',
         ],
     ]) ?>
 
