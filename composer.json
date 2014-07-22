@@ -16,9 +16,7 @@
 	],
 	"require": {
 		"yiisoft/yii2": "*",
-		"2amigos/yii2-tinymce-widget": "*",
-		"2amigos/yii2-file-upload-widget" : "*",
-		"linchpinstudios/yii2-summernote": "dev-master"
+		"zelenin/yii2-summernote-widget": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
