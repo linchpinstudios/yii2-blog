@@ -15,7 +15,8 @@
 		}
 	],
 	"require": {
-		"yiisoft/yii2": "*"
+		"yiisoft/yii2": "*",
+		"zelenin/yii2-summernote-widget": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {

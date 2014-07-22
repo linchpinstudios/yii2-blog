@@ -33,7 +33,7 @@ class m140711_063216_blog_init extends \yii\db\Migration
             'post_id' => Schema::TYPE_INTEGER,
             'comment' => Schema::TYPE_TEXT,
             'approved' => Schema::TYPE_STRING . '(20) NULL',
-            'parent' => Schema:: INT NULL,
+            'parent' => Schema::TYPE_INTEGER,
             'author_name' => Schema::TYPE_STRING . '(255) NULL',
             'author_email' => Schema::TYPE_STRING . '(255) NULL',
             'author_url' => Schema::TYPE_STRING . '(255) NULL',
@@ -66,12 +66,12 @@ class m140711_063216_blog_init extends \yii\db\Migration
             'type' => Schema::TYPE_STRING . '(20) NULL',
         ],$tableOptions);
         
-        $this->addForeignKey('FK-psots-user.id','{{%blog_posts}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
-        $this->addForeignKey('FK-comments-user.id','{{%blog_comments}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
-        $this->addForeignKey('FK-comments-post.id','{{%blog_comments}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
-        $this->addForeignKey('FK-meta-post.id','{{%blog_meta}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
-        $this->addForeignKey('FK-termrelation-post.id','{{%blog_term_relationships}}','post_id','{{%blog_terms}}','id','NO ACTION','NO ACTION');
-        $this->addForeignKey('FK-termrelation-term.id','{{%blog_term_relationships}}','term_id','{{%blog_terms}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-psots-user-id','{{%blog_posts}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-comments-user-id','{{%blog_comments}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-comments-post-id','{{%blog_comments}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-meta-post-id','{{%blog_meta}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-termrelation-post-id','{{%blog_term_relationships}}','post_id','{{%blog_terms}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-termrelation-term-id','{{%blog_term_relationships}}','term_id','{{%blog_terms}}','id','NO ACTION','NO ACTION');
 
     }
 
