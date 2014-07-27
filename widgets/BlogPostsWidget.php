@@ -52,7 +52,7 @@ class BlogPostsWidget extends \yii\base\Widget
 	    
         $postRender .= $this->renderThumbnail($post);
 	    
-	    $postRender .= '<h3 style="margin-top:0;">' . Html::a(Html::encode($post->title), ['blogposts/view', 'id' => $post->id, 'urlSlug' => $post->slug, 'year' => date('Y',strtotime($post->date)), 'month' => date('m',strtotime($post->date)), 'day' => date('d',strtotime($post->date))]) . '</h3>';
+	    $postRender .= '<h3 style="margin-top:0;">' . Html::a(Html::encode($post->title), ['blogposts/view', 'id' => $post->id, 'slug' => $post->slug, 'year' => date('Y',strtotime($post->date)), 'month' => date('m',strtotime($post->date)), 'day' => date('d',strtotime($post->date))]) . '</h3>';
 	    $postRender .= '
 	        <ul class="list-inline">
 	            <li><i class="glyphicon glyphicon-calendar"></i> '.date('M d, Y',strtotime($post->date)).'</li>
@@ -61,7 +61,7 @@ class BlogPostsWidget extends \yii\base\Widget
 	            <li><i class="glyphicon glyphicon-comment"></i> Comments</li>
 	        </ul>';
 	    $postRender .= '<p>'.$this->renderExcerpt($post).'</p>';
-        $postRender .= Html::a('Read Article',['blogposts/view', 'id' => $post->id, 'urlSlug' => $post->slug, 'year' => date('Y',strtotime($post->date)), 'month' => date('m',strtotime($post->date)), 'day' => date('d',strtotime($post->date))],['class'=>'btn btn-success btn-xs pull-right']);
+        $postRender .= Html::a('Read Article',['blogposts/view', 'id' => $post->id, 'slug' => $post->slug, 'year' => date('Y',strtotime($post->date)), 'month' => date('m',strtotime($post->date)), 'day' => date('d',strtotime($post->date))],['class'=>'btn btn-success btn-xs pull-right']);
 	    $postRender .= '</div></article></div>';
         $postRender .= '<hr />';
 		return $postRender;
@@ -156,7 +156,7 @@ class BlogPostsWidget extends \yii\base\Widget
             $date = $post->date;
             
             $thumbnail = '<div class="col-md-4">';
-            $thumbnail .= Html::a('',['blog/blogpost/view', 'id' => $post->id, 'slug' => $post->slug, 'year' => date('Y',strtotime($date)), 'month' => date('m',strtotime($date)), 'day' => date('d',strtotime($date))],['class'=>'recentPostThumnail','style'=>'background-image:url('.$post->thumbnail.')']);
+            $thumbnail .= Html::a('',['blogposts/view', 'id' => $post->id, 'slug' => $post->slug, 'year' => date('Y',strtotime($date)), 'month' => date('m',strtotime($date)), 'day' => date('d',strtotime($date))],['class'=>'recentPostThumnail','style'=>'background-image:url('.$post->thumbnail.')']);
             $thumbnail .= '</div><div class="col-md-8">';
             
             return $thumbnail;

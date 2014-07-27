@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Breadcrumbs;
+use linchpinstudios\blog\widgets\BlogCategoriesWidget;
 
 /**
  * @var yii\web\View $this
@@ -9,33 +11,34 @@ use yii\widgets\DetailView;
  */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Blog Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="blog-posts-view">
+	<div class="container large-padding">
+	    <div class="row">
+	        <div class="col-md-8">
+                
+                <?php
+                    // $this is the view object currently being used
+                        echo Breadcrumbs::widget([
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        ]);
+                ?>
+                
+	        </div>
+	    </div>
+		<div class="row">
+			<div class="col-md-8">
+                
+                <h2><?= Html::encode($this->title) ?></h2>
+    			    
+                    <?= $model->body; ?>
 
-    <p>
-        <?= Html::a('index', ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'text:ntext',
-            'authorId',
-            'categoryId',
-            'publishDate',
-        ],
-    ]) ?>
-
-</div>
+			</div>
+			<div class="col-md-4">
+				<?= BlogCategoriesWidget::widget() ?>
+			</div>
+		</div>
+	</div>
+	

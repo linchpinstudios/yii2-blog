@@ -117,6 +117,30 @@ class AdminController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    public function actionUpload()
+    {
+        $allowed = array('png', 'jpg', 'gif','zip');
+
+        if(isset($_FILES['file']) && $_FILES['file']['error'] == 0){
+        
+            $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        
+            if(!in_array(strtolower($extension), $allowed)){
+                return '{"status":"error"}';
+                exit;
+            }
+        
+            if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/'.$_FILES['file']['name'])){
+                $tmp='@web/images/uploads/'.$_FILES['file']['name'];
+                //return '@web/images/uploads/'.$_FILES['file']['name'];
+                echo '{"status":"success"}';
+                exit;
+            }
+        }
+        
+        return '{"status":"error"}';
+    }
 
     /**
      * Finds the BlogPosts model based on its primary key value.

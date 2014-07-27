@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
 use linchpinstudios\blog\widgets\BlogPostsWidget;
-use app\widgets\BlogCategoriesWidget;
+use linchpinstudios\blog\widgets\BlogCategoriesWidget;
 
 
 /**

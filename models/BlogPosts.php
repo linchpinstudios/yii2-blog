@@ -4,9 +4,10 @@ namespace linchpinstudios\blog\models;
 
 use Yii;
 use common\models\User;
-use yii\helpers\ArrayHelper;
 use yii\behaviors\TimeStampBehavior;
+use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "blog_posts".
@@ -77,6 +78,16 @@ class BlogPosts extends \yii\db\ActiveRecord
                 ],
                 'value' => function() { 
                     return (empty($this->date) ? gmdate('Y-m-d H:i:s') : gmdate('Y-m-d H:i:s',strtotime($this->date)));
+                },
+            ],
+            'slug' => [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'slug',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'slug',
+                ],
+                'value' => function() { 
+                    return (empty($this->slug) ? urlencode(str_replace(" ", "-", strtolower($this->title))) : urlencode(str_replace(" ", "-", strtolower($this->slug))));
                 },
             ],
         ];

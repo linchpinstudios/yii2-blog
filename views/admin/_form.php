@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dosamigos\tinymce\TinyMce;
-use dosamigos\fileupload\FileUploadUI;
+use Zelenin\yii\widgets\Summernote\Summernote;
 use linchpinstudios\datetimepicker\DateTime;
 
 /**
@@ -13,8 +12,8 @@ use linchpinstudios\datetimepicker\DateTime;
  */
 
 $tfArray = [
-    '1' => 'Allow',
-    '0' => 'Disallow',
+    '1' => 'Enabled',
+    '0' => 'Disabled',
 ]
 
 ?>
@@ -27,31 +26,13 @@ $tfArray = [
     
     <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
     
-    <?= $form->field($model, 'body')->widget(TinyMce::className(), [
-        'options' => ['rows' => 10],
+    <?= $form->field($model, 'body')->widget(Summernote::className(), [
         'clientOptions' => [
-            'plugins' => [
-                "advlist autolink lists link charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
-            ],
-            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            'onImageUpload' => 'function(files, editor, welEditable) {
+                    summernoteSendFile(files[0], editor, welEditable);
+                }',
         ]
     ]);?>
-    
-    <?= FileUploadUI::widget([
-            'model' => $model,
-            'attribute' => 'thumbnail',
-            'url' => ['/blog/admin/upload'],
-            'gallery' => false,
-            'fieldOptions' => [
-                    'accept' => 'image/*'
-            ],
-            'clientOptions' => [
-                    'maxFileSize' => 2000000
-            ]
-        ]);
-    ?>
     
 
     <?= $form->field($model, 'excerpt')->textarea(['rows' => 6]) ?>
@@ -67,9 +48,13 @@ $tfArray = [
         
             <?= $form->field($model, 'user_id')->dropDownList($model->authorList) ?>
 
+            <?= $form->field($model, 'status')->dropDownList($tfArray) ?>
+            
             <?= $form->field($model, 'comments')->dropDownList($tfArray) ?>
         
             <?= $form->field($model, 'date')->widget(DateTime::className(), ['options' => ['class' => 'form-control']]) ?>
+    
+            <?= $form->field($model, 'slug')->textInput(['maxlength' => 45]) ?>
     
         </div>
     </div>
@@ -77,3 +62,29 @@ $tfArray = [
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+
+<script>
+    
+    function summernoteSendFile(file, editor, welEditable){
+        
+        data = new FormData();
+        data.append("file", file);
+        
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: "<?php echo \Yii::$app->urlManager->createUrl(['filemanager/files/upload']); ?>",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                editor.insertImage(welEditable, data);
+            }
+        });
+        
+    }
+    
+</script>
