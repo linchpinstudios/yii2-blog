@@ -16,7 +16,7 @@
 	],
 	"require": {
 		"yiisoft/yii2": "*",
-		"zelenin/yii2-summernote-widget": "dev-master",
+		"linchpinstudios/yii2-filemanager": "dev-master",
 		"2amigos/yii2-tinymce-widget" : "*"
 	},
 	"autoload": {
