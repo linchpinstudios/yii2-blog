@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use linchpinstudios\filemanager\assets\FilemanagerTinyAssets;
 
 /**
  * BlogPostsController implements the CRUD actions for BlogPosts model.
@@ -49,7 +50,7 @@ class AdminController extends Controller
     {
         $searchModel = new BlogPostsSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
-
+        
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
@@ -75,6 +76,9 @@ class AdminController extends Controller
      */
     public function actionCreate()
     {
+        
+        FilemanagerTinyAssets::register($this->view);
+        
         $model = new BlogPosts;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

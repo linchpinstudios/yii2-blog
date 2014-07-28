@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use Zelenin\yii\widgets\Summernote\Summernote;
 use linchpinstudios\datetimepicker\DateTime;
+use dosamigos\tinymce\TinyMce;
 
 /**
  * @var yii\web\View $this
@@ -26,13 +27,19 @@ $tfArray = [
     
     <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
     
-    <?= $form->field($model, 'body')->widget(Summernote::className(), [
-        'clientOptions' => [
-            'onImageUpload' => 'function(files, editor, welEditable) {
-                    summernoteSendFile(files[0], editor, welEditable);
-                }',
-        ]
-    ]);?>
+    
+    <?= $form->field($model, 'body')->widget(TinyMce::className(), [
+    'options' => ['rows' => 25],
+    'language' => 'en',
+    'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen image",
+            "insertdatetime media table contextmenu paste filemanager"
+        ],
+        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image filemanager"
+    ]
+]); ?>
     
 
     <?= $form->field($model, 'excerpt')->textarea(['rows' => 6]) ?>
@@ -63,28 +70,3 @@ $tfArray = [
 
 </div>
 
-
-
-<script>
-    
-    function summernoteSendFile(file, editor, welEditable){
-        
-        data = new FormData();
-        data.append("file", file);
-        
-        $.ajax({
-            data: data,
-            type: "POST",
-            url: "<?php echo \Yii::$app->urlManager->createUrl(['filemanager/files/upload']); ?>",
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-                console.log(data);
-                editor.insertImage(welEditable, data);
-            }
-        });
-        
-    }
-    
-</script>
