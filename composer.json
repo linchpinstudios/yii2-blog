@@ -16,6 +16,7 @@
 	],
 	"require": {
 		"yiisoft/yii2": "*",
+		"linchpinstudios/yii2-datetimepicker": "dev-master",
 		"linchpinstudios/yii2-filemanager": "dev-master",
 		"2amigos/yii2-tinymce-widget" : "*"
 	},
