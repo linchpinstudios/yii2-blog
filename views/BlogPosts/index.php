@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= BlogPostsWidget::widget(['limit'=>2]); ?>
 			</div>
 			<div class="col-md-4">
-			    <?= //BlogCategoriesWidget::widget(); ?>
+			    <?= BlogCategoriesWidget::widget(); ?>
 			</div>
 		</div>
 	</div>

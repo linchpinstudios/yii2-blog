@@ -2,7 +2,7 @@
 
 namespace linchpinstudios\blog\widgets;
 
-use linchpinstudios\blog\models\BlogCategories;
+use linchpinstudios\blog\models\BlogTerms;
 use yii\helpers\Html;
 use yii\web\UrlManager;
 
@@ -11,7 +11,7 @@ class BlogCategoriesWidget extends \yii\base\Widget
 	public function run()
 	{
 
-		$categories = BlogCategories::find()->with('blogPostsCount')->orderBy('category asc')->all();
+		$categories = BlogTerms::find()->with('blogTermRelationships')->orderBy(['name' => SORT_ASC])->all();
 
 		if (empty($categories)) {
 		    echo '<h3>Categories</h3>';
@@ -36,7 +36,7 @@ class BlogCategoriesWidget extends \yii\base\Widget
 	public function renderCategory($category){
         
         $catRender = '<li>';
-        $catRender .= Html::a($category->category.' ('.count($category->blogPostsCount).')',['blogposts/category', 'id' => $category->id, 'category' => $category->category]);
+        $catRender .= Html::a($category->name.' ('.count($category->blogTermRelationships).')',['blogposts/category', 'id' => $category->id, 'category' => $category->name]);
         $catRender .= '</li>';
         
         return $catRender;	

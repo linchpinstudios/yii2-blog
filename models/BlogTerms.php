@@ -58,4 +58,7 @@ class BlogTerms extends \yii\db\ActiveRecord
     {
         return $this->hasMany(BlogTermRelationships::className(), ['post_id' => 'id']);
     }
+    
+    
+    
 }
