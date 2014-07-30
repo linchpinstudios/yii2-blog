@@ -11,7 +11,7 @@ class BlogRules extends UrlRule
 
     public function createUrl($manager, $route, $params)
     {
-        if ($route === 'blog' || $route === 'blogposts' || $route === 'blogposts/index'){
+        if ($route === 'blog' || $route === 'blog/index' || $route === 'blogposts' || $route === 'blogposts/index'){
             return 'blog';
         }
         if ($route === 'blog/view' || $route === 'blogposts' || $route === 'blogposts/view' || $route === 'blog/blogposts/view') {
