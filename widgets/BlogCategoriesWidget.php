@@ -2,7 +2,7 @@
 
 namespace linchpinstudios\blog\widgets;
 
-use common\models\BlogCategories;
+use linchpinstudios\blog\models\BlogCategories;
 use yii\helpers\Html;
 use yii\web\UrlManager;
 

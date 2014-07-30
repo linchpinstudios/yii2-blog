@@ -2,7 +2,7 @@
 
 namespace app\widgets;
 
-use common\models\BlogPosts;
+use linchpinstudios\blog\models\BlogPosts;
 use yii\helpers\Html;
 use yii\web\UrlManager;
 
