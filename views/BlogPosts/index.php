@@ -18,38 +18,6 @@ use linchpinstudios\blog\widgets\BlogCategoriesWidget;
 $this->title = 'Blog Posts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<!--<div class="container">
-    <div class="row">
-        <div class="com-md-12">
-            <div class="blog-posts-index">
-            
-                <h1><?= Html::encode($this->title) ?></h1>
-            
-                <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-            
-                <?= GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'filterModel' => $searchModel,
-                    'columns' => [
-                        ['class' => 'yii\grid\SerialColumn'],
-            
-                        'id',
-                        'title',
-                        'body:ntext',
-                        'user_id',
-                        'slug',
-                        // 'publishDate',
-            
-                        ['class' => 'yii\grid\ActionColumn'],
-                    ],
-                ]); ?>
-                
-                
-            
-            </div>
-        </div>
-    </div>
-</div>-->
 
 
 	<div class="container large-padding">
@@ -70,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= BlogPostsWidget::widget(['limit'=>2]); ?>
 			</div>
 			<div class="col-md-4">
-			    <?= BlogCategoriesWidget::widget(); ?>
+			    <?= //BlogCategoriesWidget::widget(); ?>
 			</div>
 		</div>
 	</div>
