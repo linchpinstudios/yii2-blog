@@ -39,7 +39,7 @@ class BlogRules extends UrlRule
     {
         $pathInfo = $request->getPathInfo();
         
-        if ($pathInfo == 'blog'){
+        if ($pathInfo == 'blog' || $pathInfo == 'blog/index'){
             
             $params = [];
             return ['blog/blogposts/index',$params];
