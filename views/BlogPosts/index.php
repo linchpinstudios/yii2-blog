@@ -1,7 +1,5 @@
 <?php
 
-use linchpinstudios\blog\widgets;
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
@@ -21,21 +19,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 	<div class="container large-padding">
-	    <div class="row">
-	        <div class="col-md-8">
-                
-                <?php
-                    // $this is the view object currently being used
-                        echo Breadcrumbs::widget([
-                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                        ]);
-                ?>
-                
-	        </div>
-	    </div>
 		<div class="row">
 			<div class="col-md-8">
-                <?= BlogPostsWidget::widget(['limit'=>2]); ?>
+                <?
+                   $models = $dataProvider->getModels();
+                   
+                   foreach($models as $m){
+                       
+                       echo '<div class="row"><article>';
+                       //$mRender .= $this->renderThumbnail($m);
+                       echo '<h3 style="margin-top:0;">' . Html::a(Html::encode($m->title), ['blogposts/view', 'id' => $m->id, 'slug' => $m->slug, 'year' => date('Y',strtotime($m->date)), 'month' => date('m',strtotime($m->date)), 'day' => date('d',strtotime($m->date))]) . '</h3>';
+                       echo '
+                	        <ul class="list-inline">
+                	            <li><i class="glyphicon glyphicon-calendar"></i> '.date('M d, Y',strtotime($m->date)).'</li>
+                	            <li><i class="glyphicon glyphicon-user"></i> '.$m->user_id.'</li>
+                	            <li><i class="glyphicon glyphicon-folder-close"></i> '.$m->id.'</li>
+                	            <li><i class="glyphicon glyphicon-comment"></i> Comments</li>
+                	        </ul>';
+                	   
+                	   echo '<p>'.$m->body.'</p>';
+                	   echo Html::a('Read Article',['blogposts/view', 'id' => $m->id, 'slug' => $m->slug, 'year' => date('Y',strtotime($m->date)), 'month' => date('m',strtotime($m->date)), 'day' => date('d',strtotime($m->date))],['class'=>'btn btn-success btn-xs pull-right']);
+                	   echo '</div></article></div>';
+                	   echo '<hr />';
+                       
+                   }
+                ?>
 			</div>
 			<div class="col-md-4">
 			    <?= BlogCategoriesWidget::widget(); ?>

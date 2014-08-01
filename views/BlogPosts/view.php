@@ -11,8 +11,7 @@ use linchpinstudios\blog\widgets\BlogCategoriesWidget;
  */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'] = [['label' => 'Blog', 'url' => ['/blog']],$this->title];
 
 ?>
 	<div class="container large-padding">
