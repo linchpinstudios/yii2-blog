@@ -15,9 +15,6 @@ use yii\filters\VerbFilter;
 class BlogPostsController extends Controller
 {
 
-    $layout = $this->module->layout;
-
-
     /**
      * behaviors function.
      * 
