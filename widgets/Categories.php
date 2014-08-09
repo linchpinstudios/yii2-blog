@@ -6,7 +6,7 @@ use linchpinstudios\blog\models\BlogTerms;
 use yii\helpers\Html;
 use yii\web\UrlManager;
 
-class BlogCategoriesWidget extends \yii\base\Widget
+class Categories extends \yii\base\Widget
 {
 	public function run()
 	{

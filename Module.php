@@ -27,6 +27,9 @@ class Module extends \yii\base\Module
     
     
     
+    public $publicComments = true;
+    
+    
     
     public function init()
     {

@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\Breadcrumbs;
-use linchpinstudios\blog\widgets\BlogCategoriesWidget;
+use linchpinstudios\blog\widgets\Categories;
+use linchpinstudios\blog\widgets\Comments;
 
 /**
  * @var yii\web\View $this
@@ -32,11 +33,13 @@ $this->params['breadcrumbs'] = [['label' => 'Blog', 'url' => ['/blog']],$this->t
                 
                 <h2><?= Html::encode($this->title) ?></h2>
     			    
-                    <?= $model->body; ?>
+                <?= $model->body; ?>
+                
+                <?= Comments::widget(['id' => $model->id]) ?>
 
 			</div>
 			<div class="col-md-4">
-				<?= BlogCategoriesWidget::widget() ?>
+				<?= Categories::widget() ?>
 			</div>
 		</div>
 	</div>

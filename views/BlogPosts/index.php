@@ -3,8 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
-use linchpinstudios\blog\widgets\BlogPostsWidget;
-use linchpinstudios\blog\widgets\BlogCategoriesWidget;
+use linchpinstudios\blog\widgets\Categories;
 
 
 /**
@@ -39,14 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 	   
                 	   echo '<p>'.$m->body.'</p>';
                 	   echo Html::a('Read Article',['blogposts/view', 'id' => $m->id, 'slug' => $m->slug, 'year' => date('Y',strtotime($m->date)), 'month' => date('m',strtotime($m->date)), 'day' => date('d',strtotime($m->date))],['class'=>'btn btn-success btn-xs pull-right']);
-                	   echo '</div></article></div>';
+                	   echo '</article></div>';
                 	   echo '<hr />';
                        
                    }
                 ?>
 			</div>
 			<div class="col-md-4">
-			    <?= BlogCategoriesWidget::widget(); ?>
+			    <?= Categories::widget(); ?>
 			</div>
 		</div>
 	</div>

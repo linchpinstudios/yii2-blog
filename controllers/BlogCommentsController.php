@@ -97,6 +97,28 @@ class BlogCommentsController extends Controller
             ]);
         }
     }
+    
+    
+    public function actionAjaxsubmit()
+    {
+        Yii::$app->response->getHeaders()->set('Vary', 'Accept');
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $model = new BlogComments();
+        
+        if($model->load(Yii::$app->request->post())){
+            if ($model->validate() && $model->save()) {
+                
+                
+                
+                return ['model' => $model];
+            }
+        }
+        
+        return ['error' => true];
+        
+    }
+    
 
     /**
      * Deletes an existing BlogComments model.
@@ -126,4 +148,5 @@ class BlogCommentsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
 }

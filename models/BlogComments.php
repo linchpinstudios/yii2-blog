@@ -43,6 +43,8 @@ class BlogComments extends \yii\db\ActiveRecord
         return [
             [['user_id', 'post_id', 'parent', 'notify_reply', 'notify_comments'], 'integer'],
             [['comment'], 'string'],
+            [['author_email'], 'email'],
+            [['author_url'], 'url'],
             [['date', 'date_gmt'], 'safe'],
             [['approved'], 'string', 'max' => 20],
             [['author_name', 'author_email', 'author_url', 'author_ip'], 'string', 'max' => 255]
@@ -61,9 +63,9 @@ class BlogComments extends \yii\db\ActiveRecord
             'comment' => 'Comment',
             'approved' => 'Approved',
             'parent' => 'Parent',
-            'author_name' => 'Author Name',
-            'author_email' => 'Author Email',
-            'author_url' => 'Author Url',
+            'author_name' => 'Name',
+            'author_email' => 'Email',
+            'author_url' => 'Website',
             'author_ip' => 'Author Ip',
             'notify_reply' => 'Notify Reply',
             'notify_comments' => 'Notify Comments',

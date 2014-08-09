@@ -2,39 +2,67 @@
 
 namespace linchpinstudios\blog\widgets;
 
-use linchpinstudios\blog\models\BlogPosts;
 use yii\helpers\Html;
 use yii\web\UrlManager;
+use yii\widgets\ActiveForm;
+use linchpinstudios\blog\models\BlogComments;
 
-class BlogPostsWidget extends \yii\base\Widget
+class Comments extends \yii\base\Widget
 {
-
-    public $limit = 5;
-    public $maxLength = 200;
-    public $excerptStripTags = false;
-    public $showThumbnail = true;
-    public $orderBy = 'date';
-    public $orderDirection = 'desc';
-    public $where = '';
-    public $posts;
+    
+    
+    public $id = 0;
+    
+    public $orderDirection = 'ASC';
+    
 
 	public function run()
 	{
 	
-        if(empty($this->posts)){
-		    $this->posts = BlogPosts::find()
-				->orderBy($this->orderBy.' '.$this->orderDirection)
-				->limit($this->limit)
-				->all();
+	    
+        if($this->id == 0){
+            return;
         }
-
-		if (empty($this->posts)) {
-			echo '<p>No posts to display.</p>';
-		} else {
-			echo '<ul class="list-unstyled">' . $this->renderPosts($this->posts) . '</ul>';
-		}
+        
+        $model = new BlogComments;
+        
+		$comments = BlogComments::find()
+			->orderBy('date_gmt '.$this->orderDirection)
+			->all();
+			
+        return $this->render('comment',['model' => $model, 'comments' => $comments]);
 	}
-
+    
+    
+    
+    
+    public function renderForm()
+    {
+        
+        $model = new BlogComments;
+        
+        $html = '<div class="well">';
+            $form = ActiveForm::begin([
+                'enableAjaxValidation'      => true,
+                'enableClientValidation'    => true,
+            ]);
+                $html .= '<h4>Leave a Comments</h4>';
+                
+                $html .= $form->field($model, 'comment')->textArea(['rows' => 5]);
+                $html .= $form->field($model, 'author_name')->textInput(['maxlength' => 255]);
+                $html .= $form->field($model, 'author_email')->textInput(['maxlength' => 255]);
+                $html .= $form->field($model, 'author_url')->textInput(['maxlength' => 255]);
+                
+                $html .= Html::submitButton('Submit', ['class' => 'btn btn-primary']); 
+            ActiveForm::end();
+        $html .= '</div>';
+        
+        return $html;
+            
+    }
+    
+    
+    
 	public function renderPosts($posts)
 	{
 		$items = [];
