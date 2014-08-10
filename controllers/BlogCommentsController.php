@@ -99,6 +99,12 @@ class BlogCommentsController extends Controller
     }
     
     
+    /**
+     * actionAjaxsubmit function.
+     * 
+     * @access public
+     * @return json array
+     */
     public function actionAjaxsubmit()
     {
         Yii::$app->response->getHeaders()->set('Vary', 'Accept');
@@ -108,9 +114,6 @@ class BlogCommentsController extends Controller
         
         if($model->load(Yii::$app->request->post())){
             if ($model->validate() && $model->save()) {
-                
-                
-                
                 return ['model' => $model];
             }
         }

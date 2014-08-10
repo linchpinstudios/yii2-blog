@@ -2,9 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use Zelenin\yii\widgets\Summernote\Summernote;
 use linchpinstudios\datetimepicker\DateTime;
-use dosamigos\tinymce\TinyMce;
+use 2amigos/yii2-tinymce-widget;
 
 /**
  * @var yii\web\View $this
