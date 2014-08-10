@@ -7,7 +7,9 @@ use linchpinstudios\blog\models\BlogPosts;
 use linchpinstudios\blog\models\search\BlogPosts as BlogPostsSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
 use linchpinstudios\filemanager\assets\FilemanagerTinyAssets;
 

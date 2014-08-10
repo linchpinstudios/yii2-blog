@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use linchpinstudios\datetimepicker\DateTime;
-use 2amigos/yii2-tinymce-widget;
+use dosamigos\tinymce\TinyMce;
 
 /**
  * @var yii\web\View $this

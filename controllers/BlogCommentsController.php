@@ -3,10 +3,13 @@
 namespace linchpinstudios\blog\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use linchpinstudios\blog\models\BlogComments;
 use linchpinstudios\blog\models\search\BlogComments as BlogCommentsSearch;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -29,6 +32,7 @@ class BlogCommentsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'ajaxsubmit' => ['post'],
                 ],
             ],
         ];
@@ -114,7 +118,7 @@ class BlogCommentsController extends Controller
         
         if($model->load(Yii::$app->request->post())){
             if ($model->validate() && $model->save()) {
-                return ['model' => $model];
+                return ['success' => true, 'model' => $model];
             }
         }
         
