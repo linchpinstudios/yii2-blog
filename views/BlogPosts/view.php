@@ -35,7 +35,7 @@ $this->params['breadcrumbs'] = [['label' => 'Blog', 'url' => ['/blog']],$this->t
     			    
                 <?= $model->body; ?>
                 
-                <?= Comments::widget(['id' => $model->id]) ?>
+                <?= ($module->publicComments ? Comments::widget(['id' => $model->id] : '') ?>
 
 			</div>
 			<div class="col-md-4">

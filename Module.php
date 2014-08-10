@@ -4,6 +4,7 @@ namespace linchpinstudios\blog;
 
 class Module extends \yii\base\Module
 {
+
     /**
      * controllerNamespace
      * 
@@ -27,6 +28,14 @@ class Module extends \yii\base\Module
     
     
     
+    /**
+     * publicComments
+     * 
+     * (default value: true)
+     * 
+     * @var bool
+     * @access public
+     */
     public $publicComments = true;
     
     

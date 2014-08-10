@@ -28,13 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
                        echo '<div class="row"><article>';
                        //$mRender .= $this->renderThumbnail($m);
                        echo '<h3 style="margin-top:0;">' . Html::a(Html::encode($m->title), ['blogposts/view', 'id' => $m->id, 'slug' => $m->slug, 'year' => date('Y',strtotime($m->date)), 'month' => date('m',strtotime($m->date)), 'day' => date('d',strtotime($m->date))]) . '</h3>';
-                       echo '
-                	        <ul class="list-inline">
-                	            <li><i class="glyphicon glyphicon-calendar"></i> '.date('M d, Y',strtotime($m->date)).'</li>
-                	            <li><i class="glyphicon glyphicon-user"></i> '.$m->user_id.'</li>
-                	            <li><i class="glyphicon glyphicon-folder-close"></i> '.$m->id.'</li>
-                	            <li><i class="glyphicon glyphicon-comment"></i> Comments</li>
-                	        </ul>';
+                       echo '<ul class="list-inline">';
+                	        echo '<li><i class="glyphicon glyphicon-calendar"></i> '.date('M d, Y',strtotime($m->date)).'</li>';
+                	        echo '<li><i class="glyphicon glyphicon-user"></i> '.$m->user_id.'</li>';
+                	        echo '<li><i class="glyphicon glyphicon-folder-close"></i> '.$m->id.'</li>';
+                	        echo ($module->publicComments ? '<li><i class="glyphicon glyphicon-comment"></i> Comments</li>' : '');
+                	   echo '</ul>';
                 	   
                 	   echo '<p>'.$m->body.'</p>';
                 	   echo Html::a('Read Article',['blogposts/view', 'id' => $m->id, 'slug' => $m->slug, 'year' => date('Y',strtotime($m->date)), 'month' => date('m',strtotime($m->date)), 'day' => date('d',strtotime($m->date))],['class'=>'btn btn-success btn-xs pull-right']);

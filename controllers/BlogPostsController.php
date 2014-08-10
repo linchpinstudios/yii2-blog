@@ -45,6 +45,7 @@ class BlogPostsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'module' => $this->module,
         ]);
     }
 
@@ -57,6 +58,7 @@ class BlogPostsController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'module' => $this->module,
         ]);
     }
 
