@@ -70,9 +70,14 @@ use yii\widgets\ActiveForm;
 <?
     
     foreach($comments as $c){
+        $emailhash = md5( strtolower( trim( "joshhagel@gmail.com " ) ) );
+        $str =  'http://www.gravatar.com/avatar/'.$emailhash.'?s=200' ;
         
         echo '<div class="row">';
-            echo '<div class="col-md-12">';
+            echo '<div class="col-md-3">';
+                echo '<img src="'.$str.'" style="max-width:100%">';
+            echo '</div>';
+            echo '<div class="col-md-9">';
                 echo '<strong>'.$c->author_name.'</strong> - '.date('F d, Y H:m a',strtotime($c->date)).'<br />';
                 echo $c->comment;
             echo '</div>';
