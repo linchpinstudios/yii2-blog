@@ -100,6 +100,8 @@ class AdminController extends Controller
      */
     public function actionUpdate($id)
     {
+        
+        FilemanagerTinyAssets::register($this->view);
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

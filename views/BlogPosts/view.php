@@ -15,32 +15,41 @@ $this->title = $model->title;
 $this->params['breadcrumbs'] = [['label' => 'Blog', 'url' => ['/blog']],$this->title];
 
 ?>
-	<div class="container large-padding">
-	    <div class="row">
-	        <div class="col-md-8">
-                
-                <?php
-                    // $this is the view object currently being used
-                        echo Breadcrumbs::widget([
-                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                        ]);
-                ?>
-                
-	        </div>
-	    </div>
-		<div class="row">
-			<div class="col-md-8">
-                
-                <h2><?= Html::encode($this->title) ?></h2>
-    			    
-                <?= $model->body; ?>
-                
-                <?= ($module->publicComments ? Comments::widget(['id' => $model->id] : '') ?>
-
-			</div>
-			<div class="col-md-4">
-				<?= Categories::widget() ?>
-			</div>
+<div class="blog-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'options' => [
+                        'class' => 'breadcrumbs',
+                    ]
+                ]); ?>
+        </div>
+    </div>
+	<div class="row">
+		<div class="col-md-8 columns">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><?= Html::encode($this->title) ?></h1>
+                    <ul class="list-inline">
+        	            <li><div><i class="icon-calendar"></i> <?= date('M d, Y',strtotime($model->date)) ?></div></li>
+        	            <li><div><i class="icon-comment"></i> Comments</div></li>
+        	        </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 columns blog-content">
+                    <?= $model->body; ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 columns">
+                    <?= Comments::widget(['id' => $model->id]) ?>
+                </div>
+            </div>
+		</div>
+		<div class="col-md-4 columns">
+			<?= Categories::widget() ?>
 		</div>
 	</div>
-	
+</div>
