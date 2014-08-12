@@ -15,33 +15,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-md-9">
-    
-    <div class="blog-posts-index">
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-    
-                //'id',
-                'user_id',
-                'comments',
-                'title',
-                // 'body:ntext',
-                // 'thumbnail',
-                // 'excerpt:ntext',
-                'status',
-                'slug',
-                'date',
-                // 'date_gmt',
-                // 'modified',
-                // 'modified_gmt',
-    
-                ['class' => 'yii\grid\ActionColumn'],
-            ],
-        ]); ?>
-    
-    </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="blog-posts-index">
+                    <?= GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'filterModel' => $searchModel,
+                        'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                
+                            //'id',
+                            'user_id',
+                            'comments',
+                            'title',
+                            // 'body:ntext',
+                            // 'thumbnail',
+                            // 'excerpt:ntext',
+                            'status',
+                            'slug',
+                            'date',
+                            // 'date_gmt',
+                            // 'modified',
+                            // 'modified_gmt',
+                
+                            ['class' => 'yii\grid\ActionColumn'],
+                        ],
+                    ]); ?>
+                
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-3">
         <div class="panel panel-default">

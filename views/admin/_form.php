@@ -19,51 +19,64 @@ $tfArray = [
 ?>
 
 <div class="blog-posts-form">
-    <div class="row">
-        <div class="col-md-9">
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
-    
-    
-    <?= $form->field($model, 'body')->widget(TinyMce::className(), [
-    'options' => ['rows' => 25],
-    'language' => 'en',
-    'clientOptions' => [
-        'plugins' => [
-            "advlist autolink lists link charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen image",
-            "insertdatetime media table contextmenu paste filemanager"
-        ],
-        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image filemanager"
-    ]
-]); ?>
-    
+        <div class="row">
+            <div class="col-md-9">
+                
+                <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
+                
+                
+                <?= $form->field($model, 'body')->widget(TinyMce::className(), [
+                    'options' => ['rows' => 25],
+                    'language' => 'en',
+                    'clientOptions' => [
+                        'plugins' => [
+                            "advlist autolink lists link charmap print preview anchor",
+                            "searchreplace visualblocks code fullscreen image",
+                            "insertdatetime media table contextmenu paste filemanager"
+                        ],
+                        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image filemanager"
+                    ]
+                ]); ?>
+                
 
-    <?= $form->field($model, 'excerpt')->textarea(['rows' => 6]) ?>
-
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+                <?= $form->field($model, 'excerpt')->textarea(['rows' => 6]) ?>
     
     
-        </div>
-        <div class="col-md-3">
+                <div class="form-group">
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                </div>
         
-            <?= $form->field($model, 'user_id')->dropDownList($model->authorList) ?>
-
-            <?= $form->field($model, 'status')->dropDownList($tfArray) ?>
+        
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <?= $form->field($model, 'user_id')->dropDownList($model->authorList) ?>
             
-            <?= $form->field($model, 'comments')->dropDownList($tfArray) ?>
-        
-            <?= $form->field($model, 'date')->widget(DateTime::className(), ['options' => ['class' => 'form-control']]) ?>
-    
-            <?= $form->field($model, 'slug')->textInput(['maxlength' => 45]) ?>
-    
+                        <?= $form->field($model, 'status')->dropDownList($tfArray) ?>
+                        
+                        <?= $form->field($model, 'comments')->dropDownList($tfArray) ?>
+                    
+                        <?= $form->field($model, 'date')->widget(DateTime::className(), ['options' => ['class' => 'form-control']]) ?>
+                
+                        <?= $form->field($model, 'slug')->textInput(['maxlength' => 45]) ?>
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        
+                        <h3><?= Html::t('Categories') ?></h3>
+                        
+                        <?= Html::checkboxList('categories',null,['Category 1','Category 2']) ?>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     
     <?php ActiveForm::end(); ?>
 
