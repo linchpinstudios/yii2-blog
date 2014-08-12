@@ -70,7 +70,7 @@ use yii\widgets\ActiveForm;
 <?
     
     foreach($comments as $c){
-        $emailhash = md5( strtolower( trim( "joshhagel@gmail.com " ) ) );
+        $emailhash = md5( strtolower( trim( $c->author_email ) ) );
         $str =  'http://www.gravatar.com/avatar/'.$emailhash.'?s=200' ;
         
         echo '<div class="row">';
