@@ -3,6 +3,7 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
+use linchpinstudios\blog\models\BlogTermRelationshipsQuery;
 
 /**
  * This is the model class for table "blog_term_relationships".
@@ -44,6 +45,15 @@ class BlogTermRelationships extends \yii\db\ActiveRecord
             'post_id' => 'Post ID',
             'term_id' => 'Term ID',
         ];
+    }
+    
+
+    /**
+     * @inheritdoc
+     */
+    public static function find()
+    {
+        return new BlogTermRelationshipsQuery(get_called_class());
     }
 
     /**

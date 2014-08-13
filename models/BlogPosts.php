@@ -8,6 +8,7 @@ use yii\behaviors\TimeStampBehavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use linchpinstudios\blog\models\BlogTermRelationships;
 
 /**
  * This is the model class for table "blog_posts".
@@ -171,9 +172,9 @@ class BlogPosts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getTerms()
     {
-        return $this->hasOne(BlogCategories::className(), ['id' => 'categoryId']);
+        return $this->hasMany(BlogTermRelationships::className(), ['post_id' => 'id']);
     }
 
     /**

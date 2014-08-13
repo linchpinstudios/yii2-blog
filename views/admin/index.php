@@ -26,13 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                             //'id',
                             'user_id',
-                            'comments',
+                            //'comments',
                             'title',
+                            'slug',
                             // 'body:ntext',
                             // 'thumbnail',
                             // 'excerpt:ntext',
                             'status',
-                            'slug',
                             'date',
                             // 'date_gmt',
                             // 'modified',
@@ -47,9 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="col-md-3">
+        <div class="list-group">
+          <?= Html::a('Create Blog Posts', ['create'], ['class' => 'list-group-item active']) ?>
+          <?//= Html::a('Create Blog Posts', ['create'], ['class' => 'list-group-item']) ?>
+          <?//= Html::a('Create Blog Posts', ['create'], ['class' => 'list-group-item']) ?>
+          <?//= Html::a('Create Blog Posts', ['create'], ['class' => 'list-group-item']) ?>
+        </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <?= Html::a('Create Blog Posts', ['create'], ['class' => 'btn btn-success']) ?>
+                
             </div>
         </div>
     </div>

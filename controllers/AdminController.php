@@ -3,14 +3,17 @@
 namespace linchpinstudios\blog\controllers;
 
 use Yii;
-use linchpinstudios\blog\models\BlogPosts;
-use linchpinstudios\blog\models\search\BlogPosts as BlogPostsSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;
+use linchpinstudios\blog\assets\BlogAssets;
+use linchpinstudios\blog\models\BlogPosts;
+use linchpinstudios\blog\models\BlogTerms;
+use linchpinstudios\blog\models\BlogTermRelationships;
+use linchpinstudios\blog\models\search\BlogPosts as BlogPostsSearch;
 use linchpinstudios\filemanager\assets\FilemanagerTinyAssets;
 
 /**
@@ -79,15 +82,38 @@ class AdminController extends Controller
     public function actionCreate()
     {
         
+        BlogAssets::register($this->view);
         FilemanagerTinyAssets::register($this->view);
         
         $model = new BlogPosts;
+        $terms = new BlogTerms;
+        $categories = BlogTerms::find()->termType()->orderBy('name')->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate() && $model->save()) {
+                BlogTermRelationships::deleteAll('post_id = '.$model->id);
+                $termRelations = new BlogTermRelationships;
+                $categoryTerms = Yii::$app->request->post();
+                foreach ($categoryTerms['categories'] as $c) {
+                    $termRelations->isNewRecord = true;
+                    $termRelations->id = null;
+                    $termRelations->post_id = $model->id;
+                    $termRelations->term_id = $c;
+                    $termRelations->save();
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }else{
+                return $this->render('create', [
+                    'model' => $model,
+                    'terms' => $terms,
+                    'categories' => $categories,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'terms' => $terms,
+                'categories' => $categories,
             ]);
         }
     }
@@ -101,14 +127,38 @@ class AdminController extends Controller
     public function actionUpdate($id)
     {
         
+        BlogAssets::register($this->view);
         FilemanagerTinyAssets::register($this->view);
+        
         $model = $this->findModel($id);
+        $terms = new BlogTerms;
+        $categories = BlogTerms::find()->termType()->orderBy('name')->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate() && $model->save()) {
+                BlogTermRelationships::deleteAll('post_id = '.$model->id);
+                $termRelations = new BlogTermRelationships;
+                $categoryTerms = Yii::$app->request->post();
+                foreach ($categoryTerms['categories'] as $c) {
+                    $termRelations->isNewRecord = true;
+                    $termRelations->id = null;
+                    $termRelations->post_id = $model->id;
+                    $termRelations->term_id = $c;
+                    $termRelations->save();
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }else{
+                return $this->render('create', [
+                    'model' => $model,
+                    'terms' => $terms,
+                    'categories' => $categories,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'terms' => $terms,
+                'categories' => $categories,
             ]);
         }
     }
