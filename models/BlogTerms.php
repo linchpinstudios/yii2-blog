@@ -3,7 +3,7 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
-use yii\behaviors\TimeStampBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 use linchpinstudios\blog\models\BlogTermsQuery;
