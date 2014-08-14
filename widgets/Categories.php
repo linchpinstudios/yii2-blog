@@ -11,15 +11,9 @@ class Categories extends \yii\base\Widget
 	public function run()
 	{
 
-		$categories = BlogTerms::find()->with('blogTermRelationships')->orderBy(['name' => SORT_ASC])->all();
+		$model = BlogTerms::find()->orderBy('name')->all();
 
-		if (empty($categories)) {
-		    echo '<h3>Categories</h3>';
-			echo '<p>No categories to display.</p>';
-		} else {
-		    echo '<h3>Categories</h3>';
-			echo '<ul class="list-unstyled">' . $this->renderCategories($categories) . '</ul>';
-		}
+        return $this->render('categories',['model' => $model,]);
 	}
 	
 	public function renderCategories($categories){

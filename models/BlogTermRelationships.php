@@ -3,6 +3,7 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
+use linchpinstudios\blog\models\BlogPosts;
 use linchpinstudios\blog\models\BlogTermRelationshipsQuery;
 
 /**
@@ -69,6 +70,6 @@ class BlogTermRelationships extends \yii\db\ActiveRecord
      */
     public function getPost()
     {
-        return $this->hasOne(BlogTerms::className(), ['id' => 'post_id']);
+        return $this->hasOne(BlogPosts::className(), ['id' => 'post_id']);
     }
 }

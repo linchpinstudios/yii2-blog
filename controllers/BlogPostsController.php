@@ -5,6 +5,8 @@ namespace linchpinstudios\blog\controllers;
 use Yii;
 use linchpinstudios\blog\models\BlogPosts;
 use linchpinstudios\blog\models\search\BlogPosts as BlogPostsSearch;
+use linchpinstudios\blog\models\BlogTerms;
+use linchpinstudios\blog\models\search\BlogTerms as BlogTermsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,6 +63,21 @@ class BlogPostsController extends Controller
             'module' => $this->module,
         ]);
     }
+    
+    
+    
+    public function actionCategory($id){
+        
+        $model = BlogTerms::findOne($id);
+
+        return $this->render('category', [
+            'model' => $model,
+            'module' => $this->module,
+        ]);
+        
+    }
+    
+    
 
     /**
      * Creates a new BlogPosts model.

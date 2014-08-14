@@ -7,6 +7,8 @@ use yii\behaviors\TimeStampBehavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 use linchpinstudios\blog\models\BlogTermsQuery;
+use linchpinstudios\blog\models\BlogPosts;
+use linchpinstudios\blog\models\BlogTermRelationships;
 
 /**
  * This is the model class for table "blog_terms".
@@ -96,7 +98,10 @@ class BlogTerms extends \yii\db\ActiveRecord
         return $this->hasMany(BlogTermRelationships::className(), ['post_id' => 'id']);
     }
     
-    
+    public function getPosts()
+    {
+        return $this->hasMany(BlogPosts::className(), ['id' => 'term_id'])->viaTable('{{%blog_term_relationships}}', ['post_id' => 'id']);
+    }
     
     
     

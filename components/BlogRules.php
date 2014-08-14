@@ -28,7 +28,7 @@ class BlogRules extends UrlRule
         
         if ($route === 'blog/blogposts/category' || $route === 'blog/blogposts/category'){
             if (isset($params['category'])){
-                return 'blog/blogposts/category/' . strtolower(str_replace(' ','-',$params['category']));
+                return 'blog/category/' . strtolower(str_replace(' ','-',$params['category']));
             }
         }
         
@@ -48,16 +48,16 @@ class BlogRules extends UrlRule
         
         if (preg_match('%^blog/category/(.*)%', $pathInfo, $matches)){
             
-            $category = str_replace('-', ' ', $matches[1]);
+            $category = $matches[1];
             
-            $blogPost = BlogCategories::find()->where('category LIKE :category',[':category'=>$category])->one();
+            $blogCategory = BlogTerms::find()->where('slug LIKE :slug',[':slug'=>$category])->one();
             
-            if($blogPost){
+            if($blogCategory){
                 $params = [
-                    'id' => $blogPost->id,
+                    'id' => $blogCategory->id,
                 ];
                 
-                return ['blog/category',$params];
+                return ['blog/blogposts/category',$params];
             }else{
                 return false;
             }
