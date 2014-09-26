@@ -34,7 +34,7 @@ class BlogPosts extends BlogPostsModel
             'query' => $query,
             'sort'  => [
                 'defaultOrder'  => [
-                    'date_gmt' => last_name,
+                    'date_gmt' => SORT_DESC,
                 ],
             ],
         ]);
