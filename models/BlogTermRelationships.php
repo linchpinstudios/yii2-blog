@@ -3,6 +3,8 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
+use linchpinstudios\blog\models\BlogPosts;
+use linchpinstudios\blog\models\BlogTermRelationshipsQuery;
 
 /**
  * This is the model class for table "blog_term_relationships".
@@ -45,6 +47,15 @@ class BlogTermRelationships extends \yii\db\ActiveRecord
             'term_id' => 'Term ID',
         ];
     }
+    
+
+    /**
+     * @inheritdoc
+     */
+    public static function find()
+    {
+        return new BlogTermRelationshipsQuery(get_called_class());
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -59,6 +70,6 @@ class BlogTermRelationships extends \yii\db\ActiveRecord
      */
     public function getPost()
     {
-        return $this->hasOne(BlogTerms::className(), ['id' => 'post_id']);
+        return $this->hasOne(BlogPosts::className(), ['id' => 'post_id']);
     }
 }

@@ -3,10 +3,13 @@
 namespace linchpinstudios\blog\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use linchpinstudios\blog\models\BlogComments;
 use linchpinstudios\blog\models\search\BlogComments as BlogCommentsSearch;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -17,10 +20,19 @@ class BlogCommentsController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => ['true'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'ajaxsubmit' => ['post'],
                 ],
             ],
         ];
@@ -89,6 +101,31 @@ class BlogCommentsController extends Controller
             ]);
         }
     }
+    
+    
+    /**
+     * actionAjaxsubmit function.
+     * 
+     * @access public
+     * @return json array
+     */
+    public function actionAjaxsubmit()
+    {
+        Yii::$app->response->getHeaders()->set('Vary', 'Accept');
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $model = new BlogComments();
+        
+        if($model->load(Yii::$app->request->post())){
+            if ($model->validate() && $model->save()) {
+                return ['success' => true, 'model' => $model];
+            }
+        }
+        
+        return ['error' => true];
+        
+    }
+    
 
     /**
      * Deletes an existing BlogComments model.
@@ -118,4 +155,5 @@ class BlogCommentsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
 }

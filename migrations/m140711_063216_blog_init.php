@@ -70,13 +70,20 @@ class m140711_063216_blog_init extends \yii\db\Migration
         $this->addForeignKey('FK-comments-user-id','{{%blog_comments}}','user_id','{{%user}}','id','NO ACTION','NO ACTION');
         $this->addForeignKey('FK-comments-post-id','{{%blog_comments}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
         $this->addForeignKey('FK-meta-post-id','{{%blog_meta}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
-        $this->addForeignKey('FK-termrelation-post-id','{{%blog_term_relationships}}','post_id','{{%blog_terms}}','id','NO ACTION','NO ACTION');
+        $this->addForeignKey('FK-termrelation-post-id','{{%blog_term_relationships}}','post_id','{{%blog_posts}}','id','NO ACTION','NO ACTION');
         $this->addForeignKey('FK-termrelation-term-id','{{%blog_term_relationships}}','term_id','{{%blog_terms}}','id','NO ACTION','NO ACTION');
 
     }
 
     public function safedown()
     {
+        
+        $this->dropForeignKey('FK-psots-user-id','{{%blog_posts}}');
+        $this->dropForeignKey('FK-comments-user-id','{{%blog_comments}}');
+        $this->dropForeignKey('FK-comments-post-id','{{%blog_comments}}');
+        $this->dropForeignKey('FK-meta-post-id','{{%blog_meta}}');
+        $this->dropForeignKey('FK-termrelation-post-id','{{%blog_term_relationships}}');
+        $this->dropForeignKey('FK-termrelation-term-id','{{%blog_term_relationships}}');
         
         $this->dropTable('{{%blog_posts}}');
         $this->dropTable('{{%blog_comments}}');

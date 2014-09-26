@@ -4,8 +4,11 @@ namespace linchpinstudios\blog\controllers;
 
 use Yii;
 use linchpinstudios\blog\models\BlogTerms;
+use linchpinstudios\blog\models\BlogTermRelationships;
 use linchpinstudios\blog\models\search\BlogTerms as BlogTermsSearch;
 use yii\web\Controller;
+use yii\web\Response;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -117,5 +120,31 @@ class BlogTermsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    
+    /**
+     * actionCreatecategory function.
+     * 
+     * @access public
+     * @return json array
+     */
+    public function actionCreatecategory()
+    {
+        Yii::$app->response->getHeaders()->set('Vary', 'Accept');
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $model = new BlogTerms();
+        
+        if($model->load(Yii::$app->request->post())){
+            $model->type = 'category';
+        
+            if ($model->validate() && $model->save()) {
+                return ['success' => true, 'model' => $model];
+            }
+        }
+        
+        return ['error' => $model->errors];
+        
     }
 }

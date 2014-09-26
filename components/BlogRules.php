@@ -11,12 +11,12 @@ class BlogRules extends UrlRule
 
     public function createUrl($manager, $route, $params)
     {
-        if ($route === 'blog' || $route === 'blog/blogposts' || $route === 'blog/blogposts/index'){
+        if ($route === 'blog' || $route === 'blog/index' || $route === 'blogposts' || $route === 'blogposts/index'){
             return 'blog';
         }
-        if ($route === 'blog/view' || $route === 'blog/blogposts/view') {
-            if (isset($params['year'], $params['month'], $params['day'], $params['urlSlug'])) {
-                return 'blog/' . $params['year'] . '/' . $params['month'] . '/' .$params['day'] . '/' . $params['urlSlug'];
+        if ($route === 'blog/view' || $route === 'blogposts' || $route === 'blogposts/view' || $route === 'blog/blogposts/view') {
+            if (isset($params['year'], $params['month'], $params['day'], $params['slug'])) {
+                return 'blog/' . $params['year'] . '/' . $params['month'] . '/' .$params['day'] . '/' . $params['slug'];
             } elseif (isset($params['year'], $params['month'], $params['day'])) {
                 return 'blog/' . $params['year'] . '/' . $params['month'] . '/' .$params['day'];
             } elseif (isset($params['year'], $params['month'])) {
@@ -28,7 +28,7 @@ class BlogRules extends UrlRule
         
         if ($route === 'blog/blogposts/category' || $route === 'blog/blogposts/category'){
             if (isset($params['category'])){
-                return 'blog/blogposts/category/' . strtolower(str_replace(' ','-',$params['category']));
+                return 'blog/category/' . strtolower(str_replace(' ','-',$params['category']));
             }
         }
         
@@ -48,16 +48,16 @@ class BlogRules extends UrlRule
         
         if (preg_match('%^blog/category/(.*)%', $pathInfo, $matches)){
             
-            $category = str_replace('-', ' ', $matches[1]);
+            $category = $matches[1];
             
-            $blogPost = BlogCategories::find()->where('category LIKE :category',[':category'=>$category])->one();
+            $blogCategory = BlogTerms::find()->where('slug LIKE :slug',[':slug'=>$category])->one();
             
-            if($blogPost){
+            if($blogCategory){
                 $params = [
-                    'id' => $blogPost->id,
+                    'id' => $blogCategory->id,
                 ];
                 
-                return ['blog/category',$params];
+                return ['blog/blogposts/category',$params];
             }else{
                 return false;
             }
@@ -72,11 +72,11 @@ class BlogRules extends UrlRule
             
             $date = $matches[1].'-'.$matches[2].'-'.$matches[3].'%';
             
-            $blogPost = BlogPosts::find()->where('publishDate LIKE :publishDate AND urlSlug = :urlSlug',[':publishDate'=>$date,':urlSlug'=>$matches[4]])->one();
+            $blogPost = BlogPosts::find()->where('date LIKE :date AND slug = :slug',[':date'=>$date,':slug'=>$matches[4]])->one();
             
             if($blogPost){
                 $params['id'] = $blogPost->id;
-                return ['blog/view',$params];
+                return ['blog/blogposts/view',$params];
             }else{
                 return false;  // this rule does not apply
             }

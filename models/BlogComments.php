@@ -3,6 +3,11 @@
 namespace linchpinstudios\blog\models;
 
 use Yii;
+use common\models\User;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "blog_comments".
@@ -27,6 +32,36 @@ use Yii;
  */
 class BlogComments extends \yii\db\ActiveRecord
 {
+
+
+    public function behaviors()
+    {
+        return [
+            'date' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'date',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
+                ],
+                'value' => function() { 
+                    return (empty($this->date) ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s',strtotime($this->date)));
+                },
+            ],
+            'dateGMT' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'date_gmt',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'date_gmt',
+                ],
+                'value' => function() { 
+                    return (empty($this->date) ? gmdate('Y-m-d H:i:s') : gmdate('Y-m-d H:i:s',strtotime($this->date)));
+                },
+            ],
+        ];
+    }
+    
+    
+    
     /**
      * @inheritdoc
      */
@@ -43,6 +78,8 @@ class BlogComments extends \yii\db\ActiveRecord
         return [
             [['user_id', 'post_id', 'parent', 'notify_reply', 'notify_comments'], 'integer'],
             [['comment'], 'string'],
+            [['author_email'], 'email'],
+            [['author_url'], 'url'],
             [['date', 'date_gmt'], 'safe'],
             [['approved'], 'string', 'max' => 20],
             [['author_name', 'author_email', 'author_url', 'author_ip'], 'string', 'max' => 255]
@@ -61,9 +98,9 @@ class BlogComments extends \yii\db\ActiveRecord
             'comment' => 'Comment',
             'approved' => 'Approved',
             'parent' => 'Parent',
-            'author_name' => 'Author Name',
-            'author_email' => 'Author Email',
-            'author_url' => 'Author Url',
+            'author_name' => 'Name',
+            'author_email' => 'Email',
+            'author_url' => 'Website',
             'author_ip' => 'Author Ip',
             'notify_reply' => 'Notify Reply',
             'notify_comments' => 'Notify Comments',

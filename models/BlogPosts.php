@@ -4,9 +4,11 @@ namespace linchpinstudios\blog\models;
 
 use Yii;
 use common\models\User;
-use yii\helpers\ArrayHelper;
-use yii\behaviors\TimeStampBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
+use linchpinstudios\blog\models\BlogTermRelationships;
 
 /**
  * This is the model class for table "blog_posts".
@@ -77,6 +79,16 @@ class BlogPosts extends \yii\db\ActiveRecord
                 ],
                 'value' => function() { 
                     return (empty($this->date) ? gmdate('Y-m-d H:i:s') : gmdate('Y-m-d H:i:s',strtotime($this->date)));
+                },
+            ],
+            'slug' => [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'slug',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'slug',
+                ],
+                'value' => function() { 
+                    return (empty($this->slug) ? urlencode(str_replace(" ", "-", strtolower($this->title))) : urlencode(str_replace(" ", "-", strtolower($this->slug))));
                 },
             ],
         ];
@@ -160,9 +172,9 @@ class BlogPosts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getTerms()
     {
-        return $this->hasOne(BlogCategories::className(), ['id' => 'categoryId']);
+        return $this->hasMany(BlogTermRelationships::className(), ['post_id' => 'id']);
     }
 
     /**

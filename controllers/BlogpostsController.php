@@ -5,6 +5,8 @@ namespace linchpinstudios\blog\controllers;
 use Yii;
 use linchpinstudios\blog\models\BlogPosts;
 use linchpinstudios\blog\models\search\BlogPosts as BlogPostsSearch;
+use linchpinstudios\blog\models\BlogTerms;
+use linchpinstudios\blog\models\search\BlogTerms as BlogTermsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +16,13 @@ use yii\filters\VerbFilter;
  */
 class BlogPostsController extends Controller
 {
+
+    /**
+     * behaviors function.
+     * 
+     * @access public
+     * @return void
+     */
     public function behaviors()
     {
         return [
@@ -38,6 +47,7 @@ class BlogPostsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'module' => $this->module,
         ]);
     }
 
@@ -50,8 +60,24 @@ class BlogPostsController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'module' => $this->module,
         ]);
     }
+    
+    
+    
+    public function actionCategory($id){
+        
+        $model = BlogTerms::findOne($id);
+
+        return $this->render('category', [
+            'model' => $model,
+            'module' => $this->module,
+        ]);
+        
+    }
+    
+    
 
     /**
      * Creates a new BlogPosts model.
@@ -112,7 +138,7 @@ class BlogPostsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = BlogPosts::findOne($id)) !== null) {
+        if (($model = BlogPosts::orderBy(['date_gmt' => SORT_DESC])->findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
