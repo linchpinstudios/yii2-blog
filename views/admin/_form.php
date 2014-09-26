@@ -99,7 +99,7 @@ $tfArray = [
                                 'action' => ['blogterms/createcategory'],
                                 'enableAjaxValidation'      => false,
                                 'enableClientValidation'    => true,
-                                'beforeSubmit'              => "
+                                'afterValidate'             => "
                                     function(form) {
                                         if($(form).find('.has-error').length) {
                                             return false;
