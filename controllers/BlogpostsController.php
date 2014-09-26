@@ -138,7 +138,7 @@ class BlogPostsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = BlogPosts::findOne($id)) !== null) {
+        if (($model = BlogPosts::orderBy(['date_gmt' => SORT_DESC])->findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
