@@ -32,6 +32,11 @@ class BlogPosts extends BlogPostsModel
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'  => [
+                'defaultOrder'  => [
+                    'date_gmt' => last_name,
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
