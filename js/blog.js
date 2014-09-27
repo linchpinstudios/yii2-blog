@@ -1,44 +1,4 @@
 
-$(function() {
-    
-    
-    /* Toggle Create Form
-     * 
-     * Show and hide create category form
-     */
-    $('#add-category').click(function(e){
-        e.preventDefault();
-        $('#create-category-form').toggle();
-    });
-    
-    
-    
-    $('#create_category').submit(function(e){
-        
-        e.preventDefault();
-        
-        createCategory($(this));
-        
-    });
-    
-    
-    
-    $('#add_comment').submit(function(e){
-        
-        e.preventDefault();
-        
-        insertComment($(this));
-        
-    });
-    
-    
-    
-    
-    
-});
-
-
-
 
 
 
@@ -90,6 +50,46 @@ function insertComment(form) {
             }
         }
     });
+    
+    return false;
 
 }
 
+
+$(function() {
+    
+    
+    /* Toggle Create Form
+     * 
+     * Show and hide create category form
+     */
+    $('#add-category').click(function(e){
+        e.preventDefault();
+        $('#create-category-form').toggle();
+    });
+    
+    
+    
+    $('#create_category').submit(function(e){
+        
+        e.preventDefault();
+        
+        createCategory($(this));
+        
+    });
+    
+    
+    
+    $('#add_comment').submit(function(e){
+        
+        e.preventDefault();
+        
+        insertComment($(this));
+        
+    });
+    
+    
+    
+    
+    
+});
