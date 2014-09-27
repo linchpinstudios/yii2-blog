@@ -15,27 +15,7 @@ use yii\widgets\ActiveForm;
                 'action' => ['blogcomments/ajaxsubmit'],
                 'enableAjaxValidation'      => false,
                 'enableClientValidation'    => true,
-                'beforeSubmit'              => "
-                    function(form) {
-                        if($(form).find('.has-error').length) {
-                            return false;
-                        }
-                        
-                        $.ajax({
-                            url: form.attr('action'),
-                            type: 'post',
-                            data: form.serialize(),
-                            success: function(data) {
-                                if(data.success){
-                                    $('#commentForm').hide(function(){
-                                        $('#commentThanks').show();
-                                    });
-                                }
-                            }
-                        });
-                        
-                        return false;
-                    }",
+                'id'                        => 'add_comment',
             ]);
             
             echo Html::activeHiddenInput($model, 'post_id', ['value' => $id]);

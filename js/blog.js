@@ -23,6 +23,16 @@ $(function() {
     
     
     
+    $('#add_comment').submit(function(e){
+        
+        e.preventDefault();
+        
+        insertComment($(this));
+        
+    });
+    
+    
+    
     
     
 });
@@ -57,3 +67,29 @@ function createCategory(form) {
     
     return false;
 }
+
+
+
+
+
+function insertComment(form) {
+
+    if($(form).find('.has-error').length) {
+        return false;
+    }
+    
+    $.ajax({
+        url: form.attr('action'),
+        type: 'post',
+        data: form.serialize(),
+        success: function(data) {
+            if(data.success){
+                $('#commentForm').hide(function(){
+                    $('#commentThanks').show();
+                });
+            }
+        }
+    });
+
+}
+
