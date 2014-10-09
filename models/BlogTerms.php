@@ -49,7 +49,7 @@ class BlogTerms extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'blog_terms';
+        return '{{%blog_terms}}';
     }
 
     /**
