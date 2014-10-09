@@ -23,7 +23,7 @@ class BlogTermRelationships extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'blog_term_relationships';
+        return '{{%blog_term_relationships}}';
     }
 
     /**
