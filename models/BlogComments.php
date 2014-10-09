@@ -67,7 +67,7 @@ class BlogComments extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'blog_comments';
+        return '{{%blog_comments}}';
     }
 
     /**
