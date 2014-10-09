@@ -99,7 +99,7 @@ class BlogPosts extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'blog_posts';
+        return '{{%blog_posts}}';
     }
 
     /**
