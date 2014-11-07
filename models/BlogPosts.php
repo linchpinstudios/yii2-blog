@@ -88,7 +88,7 @@ class BlogPosts extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'slug',
                 ],
                 'value' => function() { 
-                    return (empty($this->slug) ? genSlug($this->title) : genSlug($this->slug));
+                    return (empty($this->slug) ? $this->genSlug($this->title) : $this->genSlug($this->slug));
                 },
             ],
         ];
