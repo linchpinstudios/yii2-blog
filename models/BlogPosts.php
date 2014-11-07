@@ -88,12 +88,25 @@ class BlogPosts extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'slug',
                 ],
                 'value' => function() { 
-                    return (empty($this->slug) ? urlencode(str_replace(" ", "-", strtolower($this->title))) : urlencode(str_replace(" ", "-", strtolower($this->slug))));
+                    return (empty($this->slug) ? genSlug($this->title) : genSlug($this->slug));
                 },
             ],
         ];
     }
-
+    
+    public static function genSlug($str, $replace=array(), $delimiter='-'){
+    	if( !empty($replace) ) {
+    		$str = str_replace((array)$replace, ' ', $str);
+    	}
+    
+    	$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+    	$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+    	$clean = strtolower(trim($clean, '-'));
+    	$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+    
+    	return $clean;
+    }
+    
     /**
      * @inheritdoc
      */
