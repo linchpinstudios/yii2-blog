@@ -52,11 +52,9 @@ class AdminController extends Controller
         $result = parent::beforeAction($action);
         
         $options = [
-           'deleteURL'          => \Yii::$app->urlManager->createUrl('photo/delete'),
+           'tinymce'          => \Yii::$app->urlManager->createUrl('/filemanager/files/tinymce'),
         ];
-        
-        Yii::$app->view->registerJs("filemanagertiny.init(".json_encode($options).");", View::POS_END, 'my-options');
-        
+        $this->getView()->registerJs("filemanagertiny.init(".json_encode($options).");", \yii\web\View::POS_END, 'my-options');
         
         return $result;
     }
