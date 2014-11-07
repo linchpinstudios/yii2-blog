@@ -46,6 +46,22 @@ class AdminController extends Controller
             ],
         ];
     }
+    
+    public function beforeAction($action) {
+        
+        $result = parent::beforeAction($action);
+        
+        $options = [
+           'deleteURL'          => \Yii::$app->urlManager->createUrl('photo/delete'),
+        ];
+        
+        Yii::$app->view->registerJs("filemanagertiny.init(".json_encode($options).");", View::POS_END, 'my-options');
+        
+        
+        return $result;
+    }
+    
+    
 
     /**
      * Lists all BlogPosts models.
