@@ -95,8 +95,9 @@ class BlogTerms extends \yii\db\ActiveRecord
      */
     public function getBlogTermRelationships()
     {
-        return $this->hasMany(BlogTermRelationships::className(), ['post_id' => 'id']);
+        return $this->hasMany(BlogTermRelationships::className(), ['term_id' => 'id']);
     }
+    
     
     public function getPosts()
     {
