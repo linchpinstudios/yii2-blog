@@ -101,7 +101,7 @@ class BlogTerms extends \yii\db\ActiveRecord
     
     public function getPosts()
     {
-        return $this->hasMany(BlogPosts::className(), ['term_id' => 'id'])->viaTable('{{%blog_term_relationships}}', ['post_id' => 'id']);
+        return $this->hasMany(BlogPosts::className(), ['id' => 'post_id'])->viaTable('{{%blog_term_relationships}}', ['term_id' => 'id']);
     }
     
     
