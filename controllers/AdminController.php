@@ -46,6 +46,21 @@ class AdminController extends Controller
             ],
         ];
     }
+    
+    public function beforeAction($action) {
+        
+        $result = parent::beforeAction($action);
+        
+        $options = [
+           'tinymce'             => \Yii::$app->urlManager->createUrl('/filemanager/files/tinymce'),
+           'getimage'          => \Yii::$app->urlManager->createUrl('/filemanager/files/getimage'),
+        ];
+        $this->getView()->registerJs("filemanagertiny.init(".json_encode($options).");", \yii\web\View::POS_END, 'my-options');
+        
+        return $result;
+    }
+    
+    
 
     /**
      * Lists all BlogPosts models.
