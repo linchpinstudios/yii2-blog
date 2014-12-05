@@ -36,6 +36,7 @@ $tfArray = [
                             'options' => ['rows' => 25],
                             'language' => 'en',
                             'clientOptions' => [
+                                'relative_urls' => false,
                                 'plugins' => [
                                     "advlist autolink lists link charmap print preview anchor",
                                     "searchreplace visualblocks code fullscreen image",

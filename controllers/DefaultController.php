@@ -8,6 +8,8 @@ class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        $this->redirect('blogposts/index');
+        
+        // Redirects to the blogpost controller.
+        $this->redirect(['/'.$this->module->id.'/blogposts/index']);
     }
 }
