@@ -1,12 +1,18 @@
 <?php
 
-namespace app\widgets;
+namespace linchpinstudios\blog\widgets;
 
 use linchpinstudios\blog\models\BlogPosts;
 use yii\helpers\Html;
 use yii\web\UrlManager;
 
-class RecentBlogPostsTwoWidget extends \yii\base\Widget
+/**
+ * @changed by Philipp Frenzel <philipp@frenzel.net>
+ * @reason namespace not working like this
+ * @reason fields are incorrect
+ */
+
+class RecentPosts extends \yii\base\Widget
 {
 	public function run()
 	{
@@ -17,7 +23,7 @@ class RecentBlogPostsTwoWidget extends \yii\base\Widget
 		}
 
 		$posts = BlogPosts::find()
-				->orderBy('publishDate desc')
+				->orderBy('date_gmt desc')
 				->limit($limit)
 				->all();
 
@@ -40,11 +46,11 @@ class RecentBlogPostsTwoWidget extends \yii\base\Widget
 
 	public function renderPost($post)
 	{
-	    $postRender = '<div class="col-md-3"><article>';
-        $postRender .= Html::a('',['blogposts/view', 'id' => $post->id, 'urlSlug' => $post->urlSlug, 'year' => date('Y',strtotime($post->publishDate)), 'month' => date('m',strtotime($post->publishDate)), 'day' => date('d',strtotime($post->publishDate))],['class'=>'recentPostThumnail','style'=>'background-image:url('.$post->thumbnail.')']);
-	    $postRender .= '<h4>' . Html::a(Html::encode($post->title), ['blogposts/view', 'id' => $post->id, 'urlSlug' => $post->urlSlug, 'year' => date('Y',strtotime($post->publishDate)), 'month' => date('m',strtotime($post->publishDate)), 'day' => date('d',strtotime($post->publishDate))]) . '</h4>';
-	    $postRender .= '<p>'.$post->description.'</p>';
-        $postRender .= '<p class="text-right">'.Html::a('Read Article',['blogposts/view', 'id' => $post->id, 'urlSlug' => $post->urlSlug, 'year' => date('Y',strtotime($post->publishDate)), 'month' => date('m',strtotime($post->publishDate)), 'day' => date('d',strtotime($post->publishDate))],['class'=>'btn btn-success btn-xs']).'</p>';
+	    $postRender = '<div class="row"><article>';
+            //$postRender .= Html::a('',['blogposts/view', 'id' => $post->id, 'urlSlug' => $post->urlSlug, 'year' => date('Y',strtotime($post->date_gmt)), 'month' => date('m',strtotime($post->date_gmt)), 'day' => date('d',strtotime($post->date_gmt))],['class'=>'recentPostThumnail','style'=>'background-image:url('.$post->thumbnail.')']);
+	    $postRender .= '<h4>' . Html::a(Html::encode($post->title), ['blogposts/view', 'id' => $post->id, 'year' => date('Y',strtotime($post->date_gmt)), 'month' => date('m',strtotime($post->date_gmt)), 'day' => date('d',strtotime($post->date_gmt))]) . '</h4>'; //'urlSlug' => $post->urlSlug
+	    $postRender .= '<p>'.$post->excerpt.'</p>';
+            $postRender .= '<p class="text-right">'.Html::a('Read Article',['blogposts/view', 'id' => $post->id, 'year' => date('Y',strtotime($post->date_gmt)), 'month' => date('m',strtotime($post->date_gmt)), 'day' => date('d',strtotime($post->date_gmt))],['class'=>'btn btn-success btn-xs']).'</p>'; //, 'urlSlug' => $post->urlSlug
 	    $postRender .= '</article></div>';
 	
 		return $postRender;

@@ -22,7 +22,7 @@ class BlogMeta extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'blog_meta';
+        return '{{%blog_meta}}';
     }
 
     /**
