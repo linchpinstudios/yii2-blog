@@ -32,7 +32,11 @@ $tfArray = [
 
                         <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
 
-                        <?= $form->field($model, 'thumbnail')->Fileupload() ?>
+                        <?= $form->field($model, 'thumbnail')->widget(Fileupload::className(), [
+                            'clientOptions' => [
+
+                            ],
+                        ]); ?>
 
                         <?= $form->field($model, 'body')->widget(TinyMce::className(), [
                             'options' => ['rows' => 25],
