@@ -41,7 +41,6 @@ $tfArray = [
 
                         <?= $form->field($model, 'body')->widget(TinyMce::className(), [
                             'options' => ['rows' => 25],
-                            'language' => 'en',
                             'clientOptions' => [
                                 'relative_urls' => false,
                                 'plugins' => [
