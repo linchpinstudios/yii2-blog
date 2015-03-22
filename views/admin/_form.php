@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use linchpinstudios\datetimepicker\DateTime;
 use dosamigos\tinymce\TinyMce;
 use yii\helpers\ArrayHelper;
+use linchpinstudios\filemanager\widgets\Fileupload;
 
 /**
  * @var yii\web\View $this
@@ -31,7 +32,7 @@ $tfArray = [
 
                         <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
 
-                        <?= $form->field($model, 'thumbnail')->textInput(['maxlength' => 555]) ?>
+                        <?= $form->field($model, 'thumbnail')->Fileupload() ?>
 
                         <?= $form->field($model, 'body')->widget(TinyMce::className(), [
                             'options' => ['rows' => 25],
