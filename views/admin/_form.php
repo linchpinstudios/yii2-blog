@@ -32,8 +32,11 @@ $tfArray = [
 
                         <?= $form->field($model, 'title')->textInput(['maxlength' => 555]) ?>
 
-                        <?= $form->field($model, 'thumbnail')->textInput(['maxlength' => 555])
-                        /*= $form->field($model, 'thumbnail')->widget(Fileupload::className(), [
+                        <?= $form->field($model, 'thumnail')->widget(Fileupload::className(),[
+                            'clientOptions' => [],
+                        ])
+                        /*$form->field($model, 'thumbnail')->textInput(['maxlength' => 555])
+                         $form->field($model, 'thumbnail')->widget(Fileupload::className(), [
                             'clientOptions' => [
 
                             ],
