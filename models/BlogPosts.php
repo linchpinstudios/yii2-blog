@@ -41,14 +41,14 @@ class BlogPosts extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            
+
             'modified' => [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => 'modified',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'modified',
                 ],
-                'value' => function() { 
+                'value' => function() {
                     return date('Y-m-d H:i:s');
                 },
             ],
@@ -58,7 +58,7 @@ class BlogPosts extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => 'modified_gmt',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_gmt',
                 ],
-                'value' => function() { 
+                'value' => function() {
                     return gmdate('Y-m-d H:i:s');
                 },
             ],
@@ -68,7 +68,7 @@ class BlogPosts extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => 'date',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
                 ],
-                'value' => function() { 
+                'value' => function() {
                     return (empty($this->date) ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s',strtotime($this->date)));
                 },
             ],
@@ -78,7 +78,7 @@ class BlogPosts extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => 'date_gmt',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'date_gmt',
                 ],
-                'value' => function() { 
+                'value' => function() {
                     return (empty($this->date) ? gmdate('Y-m-d H:i:s') : gmdate('Y-m-d H:i:s',strtotime($this->date)));
                 },
             ],
@@ -88,26 +88,26 @@ class BlogPosts extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => 'slug',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'slug',
                 ],
-                'value' => function() { 
+                'value' => function() {
                     return (empty($this->slug) ? $this->genSlug($this->title) : $this->genSlug($this->slug));
                 },
             ],
         ];
     }
-    
+
     public static function genSlug($str, $replace=array(), $delimiter='-'){
     	if( !empty($replace) ) {
     		$str = str_replace((array)$replace, ' ', $str);
     	}
-    
+
     	$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
     	$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
     	$clean = strtolower(trim($clean, '-'));
     	$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
-    
+
     	return $clean;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -122,10 +122,10 @@ class BlogPosts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'comments'], 'integer'],
+            [['user_id', 'comments', 'thumbnail'], 'integer'],
             [['body', 'excerpt'], 'string'],
             [['date', 'date_gmt', 'modified', 'modified_gmt'], 'safe'],
-            [['title', 'thumbnail'], 'string', 'max' => 555],
+            [['title'], 'string', 'max' => 555],
             [['status'], 'string', 'max' => 20],
             [['slug'], 'string', 'max' => 45]
         ];
@@ -176,7 +176,7 @@ class BlogPosts extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'authorId']);
     }
-    
+
     public function getAuthorList()
     {
         $model = User::find()->asArray()->all();
