@@ -14,12 +14,12 @@ use yii\filters\VerbFilter;
 /**
  * BlogPostsController implements the CRUD actions for BlogPosts model.
  */
-class BlogPostsController extends Controller
+class BlogpostsController extends Controller
 {
 
     /**
      * behaviors function.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -63,21 +63,21 @@ class BlogPostsController extends Controller
             'module' => $this->module,
         ]);
     }
-    
-    
-    
+
+
+
     public function actionCategory($id){
-        
+
         $model = BlogTerms::findOne($id);
 
         return $this->render('category', [
             'model' => $model,
             'module' => $this->module,
         ]);
-        
+
     }
-    
-    
+
+
 
     /**
      * Creates a new BlogPosts model.

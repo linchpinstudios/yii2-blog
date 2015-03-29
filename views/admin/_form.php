@@ -90,7 +90,6 @@ $tfArray = [
                     </div>
                     <div class="panel-body">
 
-                        <?php //print_r($model->terms); ?>
                         <div class="categories-wrapper">
                             <?php
                                 $availableCategories = ArrayHelper::map($categories, 'id', 'name');
