@@ -19,9 +19,8 @@ function createCategory(form) {
             }
             if(data.success){
                 $('#blogterms-name').val('');
-                $('#myModal').modal('hide');
-
                 $('#categories-con').append('<label><input type=\"checkbox\" name=\"categories[]\" checked=\"checked\" value=\"'+data.model.id+'\"> '+data.model.name+'</label>');
+                $('#myModal').modal('hide');
             }
         }
     });
