@@ -96,10 +96,10 @@ $tfArray = [
                                 $preselectedOptions = ArrayHelper::map(ArrayHelper::toArray($model->terms), 'id', 'term_id');
                             ?>
                             <?= Html::checkboxList('categories',$preselectedOptions,$availableCategories,['id' => 'categories-con']) ?>
+
+                            <?php ActiveForm::end(); ?>
                         </div>
                     </div>
-
-    <?php ActiveForm::end(); ?>
 
                     <div class="panel-footer" id="create-category-form" style="display:none">
 
