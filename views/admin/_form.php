@@ -120,7 +120,7 @@ $tfArray = [
       </div>
       <?php
           $form = ActiveForm::begin([
-              'action'                    => ['blog-terms/createcategory'],
+              'action'                    => ['blogterms/createcategory'],
               'enableAjaxValidation'      => false,
               'enableClientValidation'    => true,
               'id'                        => 'create_category',

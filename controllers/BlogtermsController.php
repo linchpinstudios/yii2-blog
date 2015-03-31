@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * BlogTermsController implements the CRUD actions for BlogTerms model.
  */
-class BlogTermsController extends Controller
+class BlogtermsController extends Controller
 {
     public function behaviors()
     {
@@ -121,11 +121,11 @@ class BlogTermsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
-    
+
+
     /**
      * actionCreatecategory function.
-     * 
+     *
      * @access public
      * @return json array
      */
@@ -133,18 +133,18 @@ class BlogTermsController extends Controller
     {
         Yii::$app->response->getHeaders()->set('Vary', 'Accept');
         Yii::$app->response->format = Response::FORMAT_JSON;
-        
+
         $model = new BlogTerms();
-        
+
         if($model->load(Yii::$app->request->post())){
             $model->type = 'category';
-        
+
             if ($model->validate() && $model->save()) {
                 return ['success' => true, 'model' => $model];
             }
         }
-        
+
         return ['error' => $model->errors];
-        
+
     }
 }

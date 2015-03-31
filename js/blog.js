@@ -16,12 +16,12 @@ function createCategory(form) {
             if(data.error){
                 $('.field-blogterms-name').addClass('has-error');
                 $('.field-blogterms-name .help-block').text(data.error.name);
-                $('#myModal').modal('hide');
             }
             if(data.success){
-                $('#create-category-form').toggle();
+                $('#blogterms-name').val('');
+                $('#myModal').modal('hide');
 
-                $('#categories-con').append('<div class=\"checkbox\"><label><input type=\"checkbox\" name=\"categories[]\" checked=\"checked\" value=\"'+data.model.id+'\"> '+data.model.name+'</label></div>');
+                $('#categories-con').append('<label><input type=\"checkbox\" name=\"categories[]\" checked=\"checked\" value=\"'+data.model.id+'\"> '+data.model.name+'</label>');
             }
         }
     });
