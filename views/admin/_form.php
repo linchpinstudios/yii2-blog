@@ -86,7 +86,7 @@ $tfArray = [
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong>Categories</strong>
-                        <?= Html::a('<i class="glyphicon glyphicon-plus-sign"></i> Add', ['#'], ['class' => 'pull-right', 'id' => 'add-category']) ?>
+                        <?= Html::a('<i class="glyphicon glyphicon-plus-sign"></i> Add', ['#'], ['class' => 'pull-right', 'data-toggle' => 'modal', 'data-target' => '#myModal']) ?>
                     </div>
                     <div class="panel-body">
 
@@ -97,27 +97,43 @@ $tfArray = [
                             ?>
                             <?= Html::checkboxList('categories',$preselectedOptions,$availableCategories,['id' => 'categories-con']) ?>
 
-                            <?php ActiveForm::end(); ?>
                         </div>
-                    </div>
-
-                    <div class="panel-footer" id="create-category-form" style="display:none">
-
-                        <?php
-                            $form = ActiveForm::begin([
-                                'action'                    => ['blog-terms/createcategory'],
-                                'enableAjaxValidation'      => false,
-                                'enableClientValidation'    => true,
-                                'id'                        => 'create_category',
-                            ]);
-                        ?>
-                            <?= $form->field($terms, 'name')->textInput(['maxlength' => 255]) ?>
-                            <?= Html::submitButton('<i class="glyphicon glyphicon-plus-sign"></i> Create', ['class' => 'btn btn-success', 'id' => 'create-category']) ?>
-
-                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>
         </div>
 
+    <?php ActiveForm::end(); ?>
+
 </div>
+
+
+
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Tag</h4>
+      </div>
+      <?php
+          $form = ActiveForm::begin([
+              'action'                    => ['blog-terms/createcategory'],
+              'enableAjaxValidation'      => false,
+              'enableClientValidation'    => true,
+              'id'                        => 'create_category',
+          ]);
+      ?>
+          <div class="modal-body">
+              <?= $form->field($terms, 'name')->textInput(['maxlength' => 255]) ?>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-plus-sign"></i> Create', ['class' => 'btn btn-success', 'id' => 'create-category']) ?>
+          </div>
+          <?php ActiveForm::end(); ?>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
