@@ -25,14 +25,14 @@ class BlogpostsController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
+      return [
+        'verbs' => [
+          'class' => VerbFilter::className(),
+          'actions' => [
+            'delete' => ['post'],
+          ],
+        ],
+      ];
     }
 
     /**
