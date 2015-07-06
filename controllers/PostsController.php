@@ -12,9 +12,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BlogPostsController implements the CRUD actions for BlogPosts model.
+ * PostsController implements the CRUD actions for BlogPosts model.
  */
-class BlogpostsController extends Controller
+class PostsController extends Controller
 {
 
     /**
@@ -35,6 +35,7 @@ class BlogpostsController extends Controller
       ];
     }
 
+
     /**
      * Lists all BlogPosts models.
      * @return mixed
@@ -51,6 +52,7 @@ class BlogpostsController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single BlogPosts model.
      * @param integer $id
@@ -65,7 +67,6 @@ class BlogpostsController extends Controller
     }
 
 
-
     public function actionCategory($id){
 
         $model = BlogTerms::findOne($id);
@@ -76,7 +77,6 @@ class BlogpostsController extends Controller
         ]);
 
     }
-
 
 
     /**
@@ -97,6 +97,7 @@ class BlogpostsController extends Controller
         }
     }
 
+
     /**
      * Updates an existing BlogPosts model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -116,6 +117,7 @@ class BlogpostsController extends Controller
         }
     }
 
+
     /**
      * Deletes an existing BlogPosts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -128,6 +130,7 @@ class BlogpostsController extends Controller
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Finds the BlogPosts model based on its primary key value.

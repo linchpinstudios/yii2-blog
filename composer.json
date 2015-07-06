@@ -15,10 +15,16 @@
 		}
 	],
 	"require": {
-		"yiisoft/yii2": "*",
+        "yiisoft/yii2": "~2.0",
 		"linchpinstudios/yii2-datetimepicker": "dev-master",
 		"linchpinstudios/yii2-filemanager": "dev-master",
 		"2amigos/yii2-tinymce-widget" : "*"
+	},
+	"require-dev": {
+		"yiisoft/yii2-codeception": "~2.0",
+		"codeception/specify": "*",
+		"codeception/verify": "*",
+		"codeception/aspect-mock": "*"
 	},
 	"autoload": {
 		"psr-4": {

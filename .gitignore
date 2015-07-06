@@ -1,2 +1,14 @@
-
+codecept.phar
 .siteflow
+
+tests/_output/*
+tests/_output/*
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+/composer.phar
+
+# Mac DS_Store Files
+.DS_Store

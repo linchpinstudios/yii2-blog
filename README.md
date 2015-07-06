@@ -1,5 +1,6 @@
 yii2-blog
 =========
+[![Build Status](https://travis-ci.org/linchpinstudios/yii2-blog.svg)](https://travis-ci.org/linchpinstudios/yii2-blog)
 
 A blog package for Yii2
 

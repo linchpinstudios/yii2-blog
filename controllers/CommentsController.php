@@ -13,9 +13,9 @@ use yii\web\HttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BlogCommentsController implements the CRUD actions for BlogComments model.
+ * CommentsController implements the CRUD actions for BlogComments model.
  */
-class BlogCommentsController extends Controller
+  class CommentsController extends Controller
 {
     public function behaviors()
     {
@@ -38,6 +38,7 @@ class BlogCommentsController extends Controller
         ];
     }
 
+
     /**
      * Lists all BlogComments models.
      * @return mixed
@@ -53,6 +54,7 @@ class BlogCommentsController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single BlogComments model.
      * @param integer $id
@@ -64,6 +66,7 @@ class BlogCommentsController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
 
     /**
      * Creates a new BlogComments model.
@@ -83,6 +86,7 @@ class BlogCommentsController extends Controller
         }
     }
 
+
     /**
      * Updates an existing BlogComments model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -101,11 +105,11 @@ class BlogCommentsController extends Controller
             ]);
         }
     }
-    
-    
+
+
     /**
      * actionAjaxsubmit function.
-     * 
+     *
      * @access public
      * @return json array
      */
@@ -113,19 +117,19 @@ class BlogCommentsController extends Controller
     {
         Yii::$app->response->getHeaders()->set('Vary', 'Accept');
         Yii::$app->response->format = Response::FORMAT_JSON;
-        
+
         $model = new BlogComments();
-        
+
         if($model->load(Yii::$app->request->post())){
             if ($model->validate() && $model->save()) {
                 return ['success' => true, 'model' => $model];
             }
         }
-        
+
         return ['error' => true];
-        
+
     }
-    
+
 
     /**
      * Deletes an existing BlogComments model.
@@ -139,6 +143,7 @@ class BlogCommentsController extends Controller
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Finds the BlogComments model based on its primary key value.
@@ -155,5 +160,5 @@ class BlogCommentsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+
 }

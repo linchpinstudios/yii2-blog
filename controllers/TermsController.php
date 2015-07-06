@@ -13,10 +13,12 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BlogTermsController implements the CRUD actions for BlogTerms model.
+ * TermsController implements the CRUD actions for BlogTerms model.
  */
-class BlogtermsController extends Controller
+class TermsController extends Controller
 {
+
+
     public function behaviors()
     {
         return [
@@ -28,6 +30,7 @@ class BlogtermsController extends Controller
             ],
         ];
     }
+
 
     /**
      * Lists all BlogTerms models.
@@ -43,6 +46,7 @@ class BlogtermsController extends Controller
             'searchModel' => $searchModel,
         ]);
     }
+
 
     /**
      * Displays a single BlogTerms model.
